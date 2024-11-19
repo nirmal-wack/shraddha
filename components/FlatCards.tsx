@@ -1,60 +1,52 @@
 import React from "react";
-import { ScrollView, StyleSheet , Text , View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { ImagesAssets } from "../assets/ImageAsset";
 
-
-function FlatCards(){
-    return(
-        <View>
-            <Text style = {styles.headingText}>
-                FlatCards
-            </Text>
-           
-
-            <ScrollView horizontal={true} style = {styles.container} >
-                <View style = {styles.card}>
-                    <Text>Red</Text>
-                </View>
-                <View style = {styles.card}>
-                    <Text>Red</Text>
-                </View>
-                <View style = {styles.card}>
-                    <Text>Red</Text>
-                </View>
-                <View style = {styles.card}>
-                    <Text>Red</Text>
-                </View>
-                <View style = {styles.card}>
-                    <Text>Red</Text>
-                </View>
-            </ScrollView>
+function FlatCards() {
+    return (
+        <View style={styles.card}>
+            <View style={styles.imageContainer}>
+                <Image source={ImagesAssets.school} style={styles.image} />
+                <Text style={styles.categoryText}>Uniforms</Text> 
+            </View>
         </View>
-
-        
-    )
+    );
 }
 
 const styles = StyleSheet.create({
-    headingText : {
-        fontSize : 18 ,
-    } ,
-    container :{
-        flex : 1,
-        paddingHorizontal : 8 ,
-        flexDirection : "row",
-        elevation : 4
+    container: {
+        flex: 1,
+        paddingHorizontal: 8,
+        flexDirection: "row",
+        elevation: 4,
     },
-    card : {
-        width : 100 ,
-        height : 100 ,
-        backgroundColor : "#eb4034" ,
-        borderRadius : 8 ,
-        justifyContent : "center",
-        alignItems : "center",
-        margin : 8,
+    card: {
+ 
+        margin: 8,
+        flexDirection: "row",
+    },
+    imageContainer: {
+        position: "relative", 
+    },
+    image: {
+        width: 131,
+        height: 100,
+        borderRadius: 15,
+    },
+    categoryText: {
+        position: "absolute",
+        bottom: 3, 
+        width: "99%",
+        textAlign: "center",
+        color: "#fff", 
+        fontWeight: "bold",
+        backgroundColor: "rgba(0, 0, 0, 0.5)", // Add a background for better readability
+        paddingVertical: 4,
+        marginHorizontal : 0,
+        borderBottomLeftRadius: 7,
+        borderBottomRightRadius: 9,
 
     },
-    
- 
 });
 
 export default FlatCards;

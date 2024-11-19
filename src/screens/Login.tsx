@@ -9,6 +9,8 @@ import { RootStackParmeterList } from '../App';
 //Type Checking
 type LoginProps = NativeStackScreenProps<RootStackParmeterList,"Login">
 
+//Icons
+import {  IonIcon } from "../../components/Icons";
 
 
 const Login = ({navigation} : LoginProps ) => {
@@ -26,10 +28,25 @@ const Login = ({navigation} : LoginProps ) => {
      
       {/* Input Fields */}
       {/* <TextInput style={styles.input} placeholder="Name" /> */}
-      <TextInput style={styles.input} placeholder="Email" keyboardType="email-address" />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+      <View style={[styles.thirdContainer , {}]}>
+      <IonIcon name="mail-outline" size={20} color="#666" style={styles.icon2} />
+      <TextInput
+        style={styles.inputTwo}
+        placeholder="Enter your Email"
+        placeholderTextColor="#aaa"
+      />
+    </View>
+    <View style={styles.thirdContainer}>
+      <IonIcon name="lock-closed-outline" size={20} color="#666" style={styles.icon2} />
+      <TextInput
+        style={styles.inputTwo}
+        placeholder="Enter Your Password"
+        placeholderTextColor="#aaa"
+      />
+    </View>
+
       <View style={styles.forgotPassword}>
-      <Text onPress = {() => navigation.navigate("ForgotPassword")}>Forgot Password</Text>
+        <Text onPress = {() => navigation.navigate("ForgotPassword")} style = {styles.forgotPasswordText}>Forgot Password?</Text>
       </View>
 
 
@@ -80,6 +97,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
+    
+    
   },
   headingContainer: {
     marginHorizontal: 20,
@@ -108,17 +127,22 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 15,
     color: '#3E3E3E',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 15,
+    borderColor : "#ccc",
     marginBottom: 20,
     fontSize: 16,
   },
   forgotPassword :{
-    flexDirection: "row", // Required for horizontal alignment
-  justifyContent: "flex-end", // Align the single Text element to the end
-  alignItems: "center",
-    fontWeight: 'bold',
-
+    flexDirection: "row",  // Arrange items in a row
+    justifyContent: "flex-end",  // Push items to the end of the row
+    alignItems: "center",  // Align items vertically in the center
+    width: "100%",  // Align the single Text element to the end
+   
+  },
+  forgotPasswordText : {
+    fontWeight : "bold",
+    color : "#3EB57C",
   },
   signUpButton: {
     width: '60%',
@@ -166,6 +190,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 30,
     height: 30,
+    
   },
   loginText: {
     flexDirection: "row", // Align text horizontally
@@ -180,6 +205,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginHorizontal: 5, // Add spacing between the two Text elements
   },
+  thirdContainer : {
+    padding : 2 ,
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+
+  },
+  icon2: {
+    marginRight: 10,
+  },
+  inputTwo : {
+    flex: 1,
+    fontSize: 16,
+    color: "#333",
+  }
 });
 
 export default Login;

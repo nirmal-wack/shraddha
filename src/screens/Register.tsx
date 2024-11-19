@@ -8,6 +8,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParmeterList } from '../App';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { IonIcon } from '../../components/Icons';
 type RegisterProp = NativeStackScreenProps<RootStackParmeterList , "Register">
 
   const Register  = ({route} : RegisterProp) => {
@@ -25,12 +26,31 @@ type RegisterProp = NativeStackScreenProps<RootStackParmeterList , "Register">
       <Text style={styles.headerText}>Sign Up</Text>
       </View>
     <View style={styles.secondaryContainer}>
-      {/* Header */}
 
-      {/* Input Fields */}
-      <TextInput style={styles.input} placeholder="Name" />
-      <TextInput style={styles.input} placeholder="Email" keyboardType="email-address" />
-      <TextInput style={styles.input} placeholder="Create Password" secureTextEntry />
+      <View style={styles.thirdContainer}>
+        <IonIcon name="person-outline" size={20} color="#666" style={styles.icon2} />
+        <TextInput
+          style={styles.input}
+          placeholder="Enter Your Name"
+          placeholderTextColor="#aaa"
+        />
+      </View>
+      <View style={styles.thirdContainer}>
+        <IonIcon name="mail-outline" size={20} color="#666" style={styles.icon2} />
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your Email"
+          placeholderTextColor="#aaa"
+        />
+      </View>
+      <View style={styles.thirdContainer}>
+        <IonIcon name="lock-closed-outline" size={20} color="#666" style={styles.icon2} />
+        <TextInput
+          style={styles.input}
+          placeholder="Create Password"
+          placeholderTextColor="#aaa"
+        />
+      </View>
 
       {/* Sign Up Button */}
       <TouchableOpacity style={styles.signUpButton}>
@@ -92,16 +112,16 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 30,
   },
-  input: {
-    width: '100%',
-    padding: 15,
-    color: '#3E3E3E',
-    borderWidth: 1,
-    borderRadius : 15,
-    borderBottomColor: '#ccc',
-    marginBottom: 20,
-    fontSize: 16,
-  },
+  // input: {
+  //   width: '100%',
+  //   padding: 15,
+  //   color: '#3E3E3E',
+  //   borderWidth: 1,
+  //   borderRadius : 15,
+  //   borderBottomColor: '#ccc',
+  //   marginBottom: 20,
+  //   fontSize: 16,
+  // },
   signUpButton: {
     width: '60%',
     padding: 10,
@@ -157,6 +177,25 @@ const styles = StyleSheet.create({
   loginLink: {
     color: '#00A86B',
     fontWeight: 'bold',
+  },
+  thirdContainer : {
+    padding : 2 ,
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+
+  },
+  icon2: {
+    marginRight: 10,
+  },
+  input: {
+    flex: 1,
+    fontSize: 16,
+    color: "#333",
   },
 });
 

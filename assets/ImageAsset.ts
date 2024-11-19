@@ -3,4 +3,6 @@ export const ImagesAssets: { [key: string]: any } = {
     facebook: require('./Facebook.png'),
     twitter: require('./xtwitter.png'),
     logo: require('./edu_logo.jpg'),
+    school: require('./school1.jpg'),
+
 };

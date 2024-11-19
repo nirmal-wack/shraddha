@@ -16,10 +16,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import ForgotPassword from "./screens/ForgotPassword";
-
+import HomePage from "./screens/HomePage";
+import Cart from "./screens/Cart";
+import Profile from "./screens/Profile";
 //Splash-Screens
 import AppIntroSlider from "react-native-app-intro-slider";
 import { ImagesAssets } from "../assets/ImageAsset";
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { IonIcon } from "../components/Icons";
+
+
 
 const slides = [
   {
@@ -54,6 +61,76 @@ export type RootStackParmeterList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParmeterList>()
+function AuthStack() {
+  return (
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login"
+          component={Login}
+          options = {{
+            title : "Login Page"
+          }} 
+          />
+          <Stack.Screen name="Register"
+          component={Register}
+          options = {{
+            title : "Register Page"
+          }}
+          />
+          <Stack.Screen 
+          name = "ForgotPassword" 
+          component = {ForgotPassword} 
+          options = {{ title : "Forgot Password "}} />
+      </Stack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+function MainApp() {
+  return(
+    <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ color, size }) => {
+        let iconName = "";
+        if (route.name === "Home") iconName = "home";
+        else if (route.name === "Cart") iconName = "cart";
+        else if (route.name === "Profile") iconName = "person-circle";
+
+        return <IonIcon name={iconName} size={28} color={color} />;
+      },
+      tabBarActiveTintColor: "#3EB57C",
+      tabBarInactiveTintColor: "gray",
+
+       tabBarStyle: {
+      backgroundColor: "#fff", // Background color
+      height: 50, // Increase the height of the tab bar
+      // borderTopWidth: 2, // Border styling
+      // borderTopColor: "#f0f0f0",
+      width : "95%",
+      borderRadius : 14 ,
+      alignSelf : "center",
+      justifyContent : "center",
+      marginBottom : 10, 
+      
+    },
+    // Customizing tab label style
+    tabBarLabelStyle: {
+      fontSize: 12,
+      fontWeight: "bold",
+    },
+    // Control visibility of the label
+    tabBarShowLabel: false, // Change to `false` to hide labels
+    headerShown: false,
+    })}
+  >
+  <Tab.Screen name="Home" component={HomePage} />
+  <Tab.Screen name="Cart" component={Cart} />
+  <Tab.Screen name="Profile" component={Profile} />
+</Tab.Navigator>
+  )
+}
+
+const RootStack = createNativeStackNavigator();
+
 
 function App() : JSX.Element{
   const [showIntro, setShowIntro] = useState(true);
@@ -86,6 +163,7 @@ function App() : JSX.Element{
     <Text style={styles.customButton}>Done</Text>
   );
 
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // Simulate authentication state
 
   return showIntro ? (
     <AppIntroSlider
@@ -102,28 +180,16 @@ function App() : JSX.Element{
     />
   ) : 
 
-  // Main App
    (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login"
-          component={Login}
-          options = {{
-            title : "Login Page"
-          }} 
-          />
-          <Stack.Screen name="Register"
-          component={Register}
-          options = {{
-            title : "Register Page"
-          }}
-          />
-          <Stack.Screen 
-          name = "ForgotPassword" 
-          component = {ForgotPassword} 
-          options = {{ title : "Forgot Password "}} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      {!isAuthenticated ? (
+        <RootStack.Screen name="Auth" component={AuthStack} />
+      ) : (
+        <RootStack.Screen name="MainApp" component={MainApp} />
+      )}
+    </RootStack.Navigator>
+  </NavigationContainer>
     
   );
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Image, StyleSheet, Text, View , TouchableOpacity, Linking } from 'react-native'
+import { ImagesAssets } from '../assets/ImageAsset'
 
 function FlashCards(){
 
@@ -10,13 +11,19 @@ function FlashCards(){
       <View>
         
         <View style = {[styles.cards  ]}>
-            <Image style={ styles.cardImage} source={{uri: 'https://lh3.googleusercontent.com/proxy/86qo_22ZHTo1Tv2Kp7v0g8pUnjlpHkI5FdgGlsjgJY44ResA6x7opsd9GsdqbMngBR3Px4i8DjQ24LGGg4JJEfbGYAn9paj6nnbj69f9lEc-kbvgwRgkrnWy8n-D6Mcoc759IVIGvc9JFf-nhH5K_X-L74XfUNcdVJx4R7LPt7k-'}}/>
-            <Text>
-            Jainsim
-          </Text>
-          <TouchableOpacity onPress={() => openWebsite('https://en.wikipedia.org/wiki/Jainism')}>
-            <Text>Learn More</Text>
-          </TouchableOpacity>
+          <View style = {styles.imageContainer}>
+          <Image style={ styles.cardImage} source={ImagesAssets.school}/>
+          </View>
+
+          <View style = {styles.cardImageDesc}>
+            <Text style = {styles.schoolName}>
+              Ambe School
+            </Text>
+            <TouchableOpacity onPress={() => openWebsite('https://en.wikipedia.org/wiki/Jainism')}>
+              <Text style = {styles.locationName}>Manjalpur</Text>
+            </TouchableOpacity>
+          </View>
+         
         </View>
         
       </View>
@@ -26,17 +33,39 @@ function FlashCards(){
 
 const styles = StyleSheet.create({
     cards : {
-      width : 180 ,
-      height : 150 ,
-      backgroundColor : "#0ABDE3",
+      width : 230 ,
+      height : 240 ,
+      backgroundColor : "#FFF",
       margin : 8 ,
-      borderRadius : 8,
-
+      borderRadius : 25,
+      alignItems : "center",
 
     } ,
+    imageContainer : {
+      paddingTop : 10 ,
+    },
     cardImage : {
-        width: 180, height: 100,
-    } ,
+        width: 200, height: 150,
+        borderRadius : 15, 
+    },
+    cardImageDesc : {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: "center",
+      width: '100%',
+      marginTop: 10,
+      paddingHorizontal: 12,
+     
+    },
+    schoolName : {
+      fontWeight : "bold",
+      color : "#3E3E3E",
+    },
+    locationName : {
+      color : "#3E3E3E",
+      fontSize : 12 ,
+    }
+
 })
 
 export default FlashCards

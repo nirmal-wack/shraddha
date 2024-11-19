@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParmeterList } from "../App";
-import { FontAwesomeIcon , IonIcon } from "../../components/Icons";
+import { IonIcon } from "../../components/Icons";
 
 type ForgotProps = NativeStackScreenProps<RootStackParmeterList , "ForgotPassword">
 

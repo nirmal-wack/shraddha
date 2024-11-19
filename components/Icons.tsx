@@ -10,6 +10,7 @@ type IconProps = PropsWithChildren<{
   name: string;
   size?: number;
   color?: string;
+  style? : object;
 }>;
 
 const FontAwesomeIcon = ({ name, size = 24, color = "#000" }: IconProps) => (
