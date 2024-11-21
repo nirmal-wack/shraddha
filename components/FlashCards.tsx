@@ -2,26 +2,30 @@ import React, { Component } from 'react'
 import { Image, StyleSheet, Text, View , TouchableOpacity, Linking } from 'react-native'
 import { ImagesAssets } from '../assets/ImageAsset'
 
-function FlashCards(){
+type FlatCardsProps = {
+  image : any ,
+  title : string , 
+  location : string , 
+}
 
-  function openWebsite(websiteLink : string){
-    Linking.openURL(websiteLink)
-  }
+function FlashCards( {image , title , location} : FlatCardsProps ){
+
     return (
       <View>
         
         <View style = {[styles.cards  ]}>
           <View style = {styles.imageContainer}>
-          <Image style={ styles.cardImage} source={ImagesAssets.school}/>
+          <Image style={ styles.cardImage} source={image}/>
           </View>
 
           <View style = {styles.cardImageDesc}>
             <Text style = {styles.schoolName}>
-              Ambe School
+              {title}
             </Text>
-            <TouchableOpacity onPress={() => openWebsite('https://en.wikipedia.org/wiki/Jainism')}>
-              <Text style = {styles.locationName}>Manjalpur</Text>
-            </TouchableOpacity>
+            {/* <TouchableOpacity onPress={() => openWebsite('https://en.wikipedia.org/wiki/Jainism')}>
+            </TouchableOpacity> */}
+            <Text style = {styles.locationName}>{location}</Text>
+
           </View>
          
         </View>

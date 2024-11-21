@@ -4,5 +4,6 @@ export const ImagesAssets: { [key: string]: any } = {
     twitter: require('./xtwitter.png'),
     logo: require('./edu_logo.jpg'),
     school: require('./school1.jpg'),
+    school2 : require('./school2.png'),
 
 };

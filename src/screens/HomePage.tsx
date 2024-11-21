@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 
 import { IonIcon } from '../../components/Icons'
 import FlashCards from '../../components/FlashCards'
 import FlatCards from '../../components/FlatCards'
+import { ImagesAssets } from '../../assets/ImageAsset'
 
 export class HomePage extends Component {
   render() {
@@ -35,9 +36,11 @@ export class HomePage extends Component {
         
         <View style= {styles.categoryContainer}>
           <ScrollView horizontal = {true}>
-              <FlatCards  />
-              <FlatCards  />
-              <FlatCards  />
+              <FlatCards image={ImagesAssets.google} name = "Uniform"  />
+              <FlatCards image={ImagesAssets.twitter} name = "Uniform"  />
+              <FlatCards image={ImagesAssets.facebook} name = "Uniform"  />
+
+z
           </ScrollView>
         </View>
     
@@ -51,9 +54,10 @@ export class HomePage extends Component {
 
         <View style = {styles.sliderContainer}>
           <ScrollView horizontal={true} >
-            <FlashCards />
-            <FlashCards />
-            <FlashCards />
+            <FlashCards image={ImagesAssets.school} title = "Ambe" location='Manjalpur'   />
+            <FlashCards image={ImagesAssets.school2} title = "LFS" location='Manjalpur'   />
+
+          
           </ScrollView>
         </View>
 

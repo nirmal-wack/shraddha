@@ -2,12 +2,17 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { ImagesAssets } from "../assets/ImageAsset";
 
-function FlatCards() {
+type FlatCards = {
+    image : any ,
+    name : any ,
+}
+
+function FlatCards( { image , name } : FlatCards) {
     return (
         <View style={styles.card}>
             <View style={styles.imageContainer}>
-                <Image source={ImagesAssets.school} style={styles.image} />
-                <Text style={styles.categoryText}>Uniforms</Text> 
+                <Image source={image} style={styles.image} />
+                <Text style={styles.categoryText}>{name}</Text> 
             </View>
         </View>
     );

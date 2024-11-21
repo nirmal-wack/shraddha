@@ -102,14 +102,15 @@ function MainApp() {
 
        tabBarStyle: {
       backgroundColor: "#fff", // Background color
-      height: 50, // Increase the height of the tab bar
+      height: 60, // Increase the height of the tab bar
       // borderTopWidth: 2, // Border styling
       // borderTopColor: "#f0f0f0",
-      width : "95%",
-      borderRadius : 14 ,
+      width : "100%",
+      borderTopLeftRadius : 25 ,
+      borderTopRightRadius : 25 ,
       alignSelf : "center",
       justifyContent : "center",
-      marginBottom : 10, 
+      marginBottom : 0, 
       
     },
     // Customizing tab label style
