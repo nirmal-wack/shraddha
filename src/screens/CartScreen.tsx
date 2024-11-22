@@ -4,7 +4,7 @@ import { IonIcon } from '../../components/Icons';
 import { ImagesAssets } from '../../assets/ImageAsset';
 import CartItem from '../../components/CartItem';
 
-export class Cart extends Component {
+export class CartScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Cart;
+export default CartScreen;

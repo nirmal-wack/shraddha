@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { IonIcon } from "../../components/Icons"; // Ensure you have IonIcon imported properly
 
-const Profile= () => {
+const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       {/* Header Section */}
@@ -150,4 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default ProfileScreen;
