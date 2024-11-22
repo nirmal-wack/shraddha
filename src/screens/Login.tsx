@@ -4,8 +4,7 @@ import { ImagesAssets } from '../../assets/ImageAsset';
 
 //Navigate Stack Parameter
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParmeterList } from '../App';
-
+import { RootStackParmeterList } from '../../navigations/UserIndex';
 //Type Checking
 type LoginProps = NativeStackScreenProps<RootStackParmeterList,"Login">
 
@@ -76,9 +75,9 @@ const Login = ({navigation} : LoginProps ) => {
       {/* Login Text */}
       
     </View>
-    <View style={styles.loginText}>
-        <Text style={styles.loginLink}>Don't Have an Account Yet ?</Text>
-        <Text style={[styles.loginLink , { color: '#3EB57C',}]}  onPress={() => navigation.navigate("Register",{productId:"11"})}>Register</Text>
+    <View style={styles.registerText}>
+        <Text style={styles.registerLink}>Don't Have an Account Yet ?</Text>
+        <Text style={[styles.registerLink , { color: '#3EB57C',}]}  onPress={() => navigation.navigate("Register",{productId:"11"})}>Register</Text>
       </View>
     </View>
     
@@ -166,13 +165,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: 5,
   },
   socialMediaContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '60%',
-    marginTop: 20,
+    marginTop: 10,
   },
   iconContainer: {
     width: 50,
@@ -192,14 +191,14 @@ const styles = StyleSheet.create({
     height: 30,
     
   },
-  loginText: {
+  registerText: {
     flexDirection: "row", // Align text horizontally
     justifyContent: "center", // Center content horizontally
-    alignItems: "center", // Center content vertically
-    marginTop: 10, // Optional: Add some spacing from other elements
+    // alignItems: "center", // Center content vertically
+    // marginTop: 10, // Optional: Add some spacing from other elements
     marginBottom : 10 ,
   },
-  loginLink: {
+  registerLink: {
     color: '#3E3E3E',
     fontWeight: 'bold',
     fontSize: 14,

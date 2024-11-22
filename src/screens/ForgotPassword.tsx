@@ -3,8 +3,8 @@ import {View ,Text, TouchableOpacity , TextInput} from "react-native";
 import { StyleSheet } from "react-native";
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParmeterList } from "../App";
 import { IonIcon } from "../../components/Icons";
+import { RootStackParmeterList } from "../../navigations/UserIndex";
 
 type ForgotProps = NativeStackScreenProps<RootStackParmeterList , "ForgotPassword">
 

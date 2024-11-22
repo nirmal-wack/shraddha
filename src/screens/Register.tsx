@@ -5,7 +5,7 @@ import { ImagesAssets } from '../../assets/ImageAsset';
 //navigation 
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParmeterList } from '../App';
+import { RootStackParmeterList } from '../../navigations/UserIndex';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { IonIcon } from '../../components/Icons';
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     marginTop: 30,
+    fontWeight : "bold",
   },
   loginLink: {
     color: '#00A86B',
