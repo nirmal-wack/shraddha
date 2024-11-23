@@ -16,8 +16,10 @@ import HomePage from "../src/screens/HomePage";
 import CartScreen from "../src/screens/CartScreen";
 import ProfileScreen from "../src/screens/ProfileScreen";
 
+import Notification from "../src/screens/Notification";
+import Filter from "../src/screens/Filter";
 //Navigations
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { IonIcon } from "../components/Icons";
 
@@ -33,6 +35,9 @@ export type RootStackParmeterList = {
     Login: undefined;
     Register: { productId: string }
     ForgotPassword: undefined;
+    Notification : undefined 
+    Filter : undefined
+    HomePage : undefined 
 };
 
 //Authentication Screens
@@ -61,6 +66,22 @@ function AuthStack() {
 }
 
 // BottomBar leading to MainApp
+
+const HomeStackNavigator = createNativeStackNavigator<RootStackParmeterList>();
+export type HomePageProps = NativeStackScreenProps<RootStackParmeterList, "HomePage">;
+export type NotificationProps = NativeStackScreenProps<RootStackParmeterList, "Notification">;
+export type FilterProps = NativeStackScreenProps<RootStackParmeterList, "Filter">;
+
+// Nested Screens From Home
+function HomeStack() {
+    return (
+      <HomeStackNavigator.Navigator screenOptions={{ headerShown: false }}>
+        <HomeStackNavigator.Screen name="HomePage" component={HomePage} />
+        <HomeStackNavigator.Screen name="Notification" component={Notification} />
+        <HomeStackNavigator.Screen name="Filter" component={Filter} />
+      </HomeStackNavigator.Navigator>
+    );
+  }
 const Tab = createBottomTabNavigator();
 function MainApp() {
     return (
@@ -100,7 +121,7 @@ function MainApp() {
                 headerShown: false,
             })}
         >
-            <Tab.Screen name="Home" component={HomePage} />
+            <Tab.Screen name="Home" component={HomeStack} />
             <Tab.Screen name="Cart" component={CartScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
@@ -188,6 +209,27 @@ function UserIndex() {
     );
 }
 
+
+
+function ProfileStack() {
+    return (
+        <Stack.Navigator initialRouteName="Notification">
+            <Stack.Screen name="Notification"
+                component={Notification}
+                options={{
+                    title: "Notification Page"
+                }}
+            />
+            <Stack.Screen name= "Filter"
+                component={Filter}
+                options={{
+                    title: "Register Page"
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+
 const styles = StyleSheet.create({
     slide: {
         flex: 1,
@@ -237,5 +279,6 @@ const styles = StyleSheet.create({
 export { SplashScreens };
 export { MainApp };
 export { AuthStack };
+export {ProfileStack};
 export default UserIndex;
 // change the issues

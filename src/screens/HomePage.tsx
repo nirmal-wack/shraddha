@@ -4,67 +4,67 @@ import { IonIcon } from '../../components/Icons'
 import FlashCards from '../../components/FlashCards'
 import FlatCards from '../../components/FlatCards'
 import { ImagesAssets } from '../../assets/ImageAsset'
-
-export class HomePage extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { HomePageProps } from '../../navigations/UserIndex'
+function HomePage({ navigation }: HomePageProps) {
+  return (
+    <View style={styles.container}>
         // Location Bar Row
-        <View style={styles.secondaryContainer}>
-          <View style={styles.locationContainer}>
-            <IonIcon name="location" size={24} color="#000" />
-            <Text style={styles.locationText}>456 Elm Street, Suite 3, LA</Text>
-          </View>
-
-          <TouchableOpacity style={[styles.notificationIcon]}>
-            <IonIcon name="notifications" color='#3EB57C'  size={24} />
-          </TouchableOpacity>
+      <View style={styles.secondaryContainer}>
+        <View style={styles.locationContainer}>
+          <IonIcon name="location" size={24} color="#000" />
+          <Text style={styles.locationText}>456 Elm Street, Suite 3, LA</Text>
         </View>
 
-        // Serach Bar Row 
-        <View style={styles.thirdContainer}>
-          <View style={styles.searchContainer} >
-            <IonIcon name="search-outline" color='#3E3E3E' />
-            <TextInput placeholder='Search Here...' />
-          </View>
-          <TouchableOpacity style={[styles.filter]}>
-            <IonIcon name="options" color="#FFFFFF" size={30} />
-          </TouchableOpacity>
+        <TouchableOpacity style={[styles.notificationIcon]} onPress={() => navigation.navigate("Notification")}>
+          <IonIcon name="notifications" color='#3EB57C' size={24} />
+        </TouchableOpacity>
+      </View>
+
+        // Serach Bar Row
+      <View style={styles.thirdContainer}>
+        <View style={styles.searchContainer} >
+          <IonIcon name="search-outline" color='#3E3E3E' />
+          <TextInput placeholder='Search Here...' />
         </View>
+        <TouchableOpacity style={[styles.filter]} onPress={() => navigation.navigate("Filter")}>
+          <IonIcon name="options" color="#FFFFFF" size={30} />
+        </TouchableOpacity>
+      </View>
 
         //Categories
-        
-        <View style= {styles.categoryContainer}>
-          <ScrollView horizontal = {true}>
-              <FlatCards image={ImagesAssets.google} name = "Uniform"  />
-              <FlatCards image={ImagesAssets.twitter} name = "Uniform"  />
-              <FlatCards image={ImagesAssets.facebook} name = "Uniform"  />
 
-z
-          </ScrollView>
-        </View>
-    
-        //Products
-        <View style = {styles.productTitleContainer} >
-          <Text style = {styles.productTitle}>Nearby Schools</Text> 
-          <TouchableOpacity style={[styles.allSchoolIcon]}>
-            <IonIcon name="chevron-forward-outline" color="#3EB57C" size={30} />
-          </TouchableOpacity>
-        </View>
+      <View style={styles.categoryContainer}>
+        <ScrollView horizontal={true}>
+          <FlatCards image={ImagesAssets.google} name="Uniform" />
+          <FlatCards image={ImagesAssets.twitter} name="Uniform" />
+          <FlatCards image={ImagesAssets.facebook} name="Uniform" />
 
-        <View style = {styles.sliderContainer}>
-          <ScrollView horizontal={true} >
-            <FlashCards image={ImagesAssets.school} title = "Ambe" location='Manjalpur'   />
-            <FlashCards image={ImagesAssets.school2} title = "LFS" location='Manjalpur'   />
-
-          
-          </ScrollView>
-        </View>
-// Test Commit
+          z
+        </ScrollView>
       </View>
-    )
-  }
+
+        //Products
+      <View style={styles.productTitleContainer} >
+        <Text style={styles.productTitle}>Nearby Schools</Text>
+        <TouchableOpacity style={[styles.allSchoolIcon]}>
+          <IonIcon name="chevron-forward-outline" color="#3EB57C" size={30} />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.sliderContainer}>
+        <ScrollView horizontal={true} >
+          <FlashCards image={ImagesAssets.school} title="Ambe" location='Manjalpur' />
+          <FlashCards image={ImagesAssets.school2} title="LFS" location='Manjalpur' />
+
+
+        </ScrollView>
+      </View>
+// Test Commit
+    </View>
+  )
 }
+
 
 const styles = StyleSheet.create({
 
@@ -82,15 +82,15 @@ const styles = StyleSheet.create({
 
   },
   locationContainer: {
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    
+    flexDirection: 'row',
+    alignItems: 'center',
+
   },
   locationText: {
     fontSize: 16,
     color: '#3EB57C',
     fontWeight: '500',
-    marginLeft : 5, 
+    marginLeft: 5,
   },
   notificationIcon: {
     width: 50,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    
+
   },
 
   // Search Bar 
@@ -132,26 +132,26 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  categoryContainer : {
+  categoryContainer: {
     paddingHorizontal: 20,
-    marginTop : 20 ,
-    flexDirection : "row",
+    marginTop: 20,
+    flexDirection: "row",
     justifyContent: 'space-between',
     alignItems: "center",
   },
-  productTitleContainer : {
+  productTitleContainer: {
     paddingHorizontal: 20,
-    marginTop : 20 ,
-    flexDirection : "row",
+    marginTop: 20,
+    flexDirection: "row",
     justifyContent: 'space-between',
     alignItems: "center",
   },
-  productTitle : {
-    fontSize : 22 ,
-    color : '#3E3E3E',
-    fontWeight : "bold",
+  productTitle: {
+    fontSize: 22,
+    color: '#3E3E3E',
+    fontWeight: "bold",
   },
-  allSchoolIcon : {
+  allSchoolIcon: {
     width: 50,
     height: 50,
     alignItems: 'center',
@@ -159,8 +159,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  sliderContainer : {
-   
+  sliderContainer: {
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: "center",
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     paddingHorizontal: 10,
   }
-  
+
 
 
 })
