@@ -6,29 +6,31 @@ import FlatCards from '../../components/FlatCards'
 import { ImagesAssets } from '../../assets/ImageAsset'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { HomePageProps } from '../../navigations/UserIndex'
+import DealerCards from '../../components/DealerCards'
+
 function HomePage({ navigation }: HomePageProps) {
   return (
     <View style={styles.container}>
         // Location Bar Row
       <View style={styles.secondaryContainer}>
         <View style={styles.locationContainer}>
-          <IonIcon name="location" size={24} color="#000" />
+          <IonIcon name="location-sharp" size={24} color="#000" />
           <Text style={styles.locationText}>456 Elm Street, Suite 3, LA</Text>
         </View>
 
         <TouchableOpacity style={[styles.notificationIcon]} onPress={() => navigation.navigate("Notification")}>
-          <IonIcon name="notifications" color='#3EB57C' size={24} />
+          <IonIcon name="notifications-sharp" color='#3EB57C' size={24} />
         </TouchableOpacity>
       </View>
 
         // Serach Bar Row
       <View style={styles.thirdContainer}>
         <View style={styles.searchContainer} >
-          <IonIcon name="search-outline" color='#3E3E3E' />
+          <IonIcon name="search-sharp" color='#3E3E3E' />
           <TextInput placeholder='Search Here...' />
         </View>
         <TouchableOpacity style={[styles.filter]} onPress={() => navigation.navigate("Filter")}>
-          <IonIcon name="options" color="#FFFFFF" size={30} />
+          <IonIcon name="options-sharp" color="#FFFFFF" size={30} />
         </TouchableOpacity>
       </View>
 
@@ -36,26 +38,42 @@ function HomePage({ navigation }: HomePageProps) {
 
       <View style={styles.categoryContainer}>
         <ScrollView horizontal={true}>
+          <FlatCards image={ImagesAssets.backpack} name="Bags" />
           <FlatCards image={ImagesAssets.google} name="Uniform" />
-          <FlatCards image={ImagesAssets.twitter} name="Uniform" />
           <FlatCards image={ImagesAssets.facebook} name="Uniform" />
-
-          z
         </ScrollView>
       </View>
 
         //Products
       <View style={styles.productTitleContainer} >
-        <Text style={styles.productTitle}>Nearby Schools</Text>
+        <Text style={styles.productTitle}>Nearby Dealers</Text>
         <TouchableOpacity style={[styles.allSchoolIcon]}>
-          <IonIcon name="chevron-forward-outline" color="#3EB57C" size={30} />
+          <IonIcon name="chevron-forward-sharp" color="#3EB57C" size={30} />
         </TouchableOpacity>
       </View>
 
       <View style={styles.sliderContainer}>
         <ScrollView horizontal={true} >
-          <FlashCards image={ImagesAssets.school} title="Ambe" location='Manjalpur' />
-          <FlashCards image={ImagesAssets.school2} title="LFS" location='Manjalpur' />
+          {/* <FlashCards image={ImagesAssets.school} title="Ambe" location='Manjalpur' />
+          <FlashCards image={ImagesAssets.school2} title="LFS" location='Manjalpur' /> */}
+
+          <DealerCards image={ImagesAssets.google}
+            company_name = "Name / Company Name"
+            year = "2024"
+            dealer_name = "Admin"
+            rating = "5.0"
+            address = "Manjalpur ,Vadodara"
+            phone = " +91 9098765431"
+            no_product = "1" />
+
+<DealerCards image={ImagesAssets.facebook}
+            company_name = "Name / Company Name"
+            year = "2024"
+            dealer_name = "Admin"
+            rating = "5.0"
+            address = "Vadodara Address,,Vadodara,Gujarat,India-909090"
+            phone = " +91 9098765432"
+            no_product = "1" />
 
 
         </ScrollView>

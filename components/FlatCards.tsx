@@ -29,23 +29,29 @@ const styles = StyleSheet.create({
  
         margin: 8,
         flexDirection: "row",
+        backgroundColor : "#fff",
+        borderRadius : 9,
+
     },
     imageContainer: {
-        position: "relative", 
+        width: 125,
+        height: 100,
+        borderRadius: 15,
+        alignItems:"center"
     },
     image: {
-        width: 131,
-        height: 100,
+        width: 80,
+        height: 80,
         borderRadius: 15,
     },
     categoryText: {
         position: "absolute",
-        bottom: 3, 
+        bottom: 0, 
         width: "99%",
         textAlign: "center",
         color: "#fff", 
         fontWeight: "bold",
-        backgroundColor: "rgba(0, 0, 0, 0.5)", // Add a background for better readability
+        backgroundColor: "rgba(62, 181, 124, 0.7)", // Add a background for better readability
         paddingVertical: 4,
         marginHorizontal : 0,
         borderBottomLeftRadius: 7,

@@ -5,5 +5,6 @@ export const ImagesAssets: { [key: string]: any } = {
     logo: require('./edu_logo.jpg'),
     school: require('./school1.jpg'),
     school2 : require('./school2.png'),
+    backpack : require('./backpack_.png'),
 
 };

@@ -15,6 +15,7 @@ import ForgotPassword from "../src/screens/ForgotPassword";
 import HomePage from "../src/screens/HomePage";
 import CartScreen from "../src/screens/CartScreen";
 import ProfileScreen from "../src/screens/ProfileScreen";
+import OtpVerificationScreen from "../src/screens/OtpVerificationScreen";
 
 import Notification from "../src/screens/Notification";
 import Filter from "../src/screens/Filter";
@@ -35,9 +36,11 @@ export type RootStackParmeterList = {
     Login: undefined;
     Register: { productId: string }
     ForgotPassword: undefined;
+    OtpVerificationScreen : undefined ;
     Notification : undefined 
     Filter : undefined
     HomePage : undefined 
+
 };
 
 //Authentication Screens
@@ -61,6 +64,14 @@ function AuthStack() {
                 name="ForgotPassword"
                 component={ForgotPassword}
                 options={{ title: "Forgot Password " }} />
+                
+            <Stack.Screen 
+                name = "OtpVerificationScreen"
+                component={OtpVerificationScreen}
+                options = {{
+                  title : "Verification Page"  
+                }}/>
+
         </Stack.Navigator>
     );
 }

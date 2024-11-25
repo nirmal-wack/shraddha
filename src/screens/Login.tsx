@@ -18,15 +18,17 @@ const Login = ({navigation} : LoginProps ) => {
       <View style={styles.headingContainer}>
       <Text style={styles.headerText}>LOGO</Text>
       </View>
-      <Text style = {[styles.headText , { fontSize: 24 } ] }   > Log In </Text>
-      <Text style = {[styles.headerInnerText , { fontSize: 16 } ] }> Welcome back </Text>
+      <View>
+        <Text style = {[styles.headText , { fontSize: 24 } ] }   > Log In </Text>
+        <Text style = {[styles.headerInnerText , { fontSize: 16 } ] }> Welcome back </Text>
+      </View>
+      
 
     <View style={styles.secondaryContainer}>
       {/* Header */}
 
      
       {/* Input Fields */}
-      {/* <TextInput style={styles.input} placeholder="Name" /> */}
       <View style={[styles.thirdContainer , {}]}>
       <IonIcon name="mail-outline" size={20} color="#666" style={styles.icon2} />
       <TextInput
@@ -34,23 +36,23 @@ const Login = ({navigation} : LoginProps ) => {
         placeholder="Enter your Email"
         placeholderTextColor="#aaa"
       />
-    </View>
-    <View style={styles.thirdContainer}>
+        </View>
+    {/* <View style={styles.thirdContainer}>
       <IonIcon name="lock-closed-outline" size={20} color="#666" style={styles.icon2} />
       <TextInput
         style={styles.inputTwo}
         placeholder="Enter Your Password"
         placeholderTextColor="#aaa"
       />
-    </View>
+    </View> */}
 
-      <View style={styles.forgotPassword}>
+      {/* <View style={styles.forgotPassword}>
         <Text onPress = {() => navigation.navigate("ForgotPassword")} style = {styles.forgotPasswordText}>Forgot Password?</Text>
-      </View>
+      </View> */}
 
 
       {/* Sign Up Button */}
-      <TouchableOpacity style={styles.signUpButton}>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.navigate("OtpVerificationScreen")}>
         <Text style={styles.signUpButtonText}>Log In</Text>
       </TouchableOpacity>
 
@@ -92,11 +94,9 @@ const styles = StyleSheet.create({
   secondaryContainer: {
     flex: 1,
     paddingHorizontal: 20, // Combines paddingLeft and paddingRight
-    paddingTop: 5,
-    justifyContent: 'center',
+    paddingTop: 70,
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    
     
   },
   headingContainer: {
@@ -107,19 +107,19 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   headText : {
     color: '#3E3E3E',
     paddingHorizontal : 15 ,
     paddingTop : 40 ,
     justifyContent : 'flex-start',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   headerInnerText :{
     color: '#3E3E3E',
     paddingHorizontal : 15 ,
-    marginBottom: 20,
+    marginBottom: 5,
   },
 
   input: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     color : "#3EB57C",
   },
   signUpButton: {
-    width: '60%',
+    width: '80%',
     padding: 10,
     backgroundColor: '#3EB57C',
     borderRadius: 12,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5, // Add spacing between the two Text elements
   },
   thirdContainer : {
-    padding : 2 ,
+    padding : 4 ,
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   },
   inputTwo : {
     flex: 1,
-    fontSize: 16,
+    fontSize: 18,
     color: "#333",
   }
 });
