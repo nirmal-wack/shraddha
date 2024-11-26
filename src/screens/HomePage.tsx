@@ -64,7 +64,7 @@ function HomePage({ navigation }: HomePageProps) {
             rating = "5.0"
             address = "Manjalpur ,Vadodara"
             phone = " +91 9098765431"
-            no_product = "1" />
+            no_product = "1" onPress = {() => navigation.navigate("ProductPage")} />
 
 <DealerCards image={ImagesAssets.facebook}
             company_name = "Name / Company Name"
@@ -73,7 +73,7 @@ function HomePage({ navigation }: HomePageProps) {
             rating = "5.0"
             address = "Vadodara Address,,Vadodara,Gujarat,India-909090"
             phone = " +91 9098765432"
-            no_product = "1" />
+            no_product = "1" onPress = {() => navigation.navigate("ProductPage")} />
 
 
         </ScrollView>

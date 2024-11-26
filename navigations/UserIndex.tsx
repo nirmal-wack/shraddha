@@ -19,6 +19,8 @@ import OtpVerificationScreen from "../src/screens/OtpVerificationScreen";
 
 import Notification from "../src/screens/Notification";
 import Filter from "../src/screens/Filter";
+import ProductPage from "../src/screens/ProductPage";
+
 //Navigations
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -40,6 +42,7 @@ export type RootStackParmeterList = {
     Notification : undefined 
     Filter : undefined
     HomePage : undefined 
+    ProductPage : undefined 
 
 };
 
@@ -82,6 +85,7 @@ const HomeStackNavigator = createNativeStackNavigator<RootStackParmeterList>();
 export type HomePageProps = NativeStackScreenProps<RootStackParmeterList, "HomePage">;
 export type NotificationProps = NativeStackScreenProps<RootStackParmeterList, "Notification">;
 export type FilterProps = NativeStackScreenProps<RootStackParmeterList, "Filter">;
+export type ProductPageProps = NativeStackScreenProps<RootStackParmeterList , "ProductPage">
 
 // Nested Screens From Home
 function HomeStack() {
@@ -90,6 +94,7 @@ function HomeStack() {
         <HomeStackNavigator.Screen name="HomePage" component={HomePage} />
         <HomeStackNavigator.Screen name="Notification" component={Notification} />
         <HomeStackNavigator.Screen name="Filter" component={Filter} />
+        <HomeStackNavigator.Screen name="ProductPage" component ={ProductPage}/>
       </HomeStackNavigator.Navigator>
     );
   }

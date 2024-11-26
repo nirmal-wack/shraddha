@@ -12,9 +12,10 @@ type DealerCardsProps = {
     address : string ,
     phone : string ,
     no_product : string ,
+    onPress : any ,
 }
 
-function DealerCards ( { image , company_name , year , dealer_name , rating , address , phone , no_product  } : DealerCardsProps ) {
+function DealerCards ( { image , company_name , year , dealer_name , rating , address , phone , no_product , onPress  } : DealerCardsProps ) {
   return (
     <View style={styles.cardContainer}>
       {/* Logo and Title */}
@@ -52,7 +53,7 @@ function DealerCards ( { image , company_name , year , dealer_name , rating , ad
         <TouchableOpacity style={styles.productsButton}>
           <Text style={styles.productsButtonText}>{no_product} Products</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.visitButton}>
+        <TouchableOpacity style={styles.visitButton} onPress = {onPress}>
           <Text style={styles.visitButtonText}>Visit Store </Text>
           <IonIcon name = "arrow-forward-sharp" size = {14} color='#fff'/>
 
