@@ -6,10 +6,11 @@ type ProductCard = {
     image : any ,
     name : any ,
     style : any ,
+    onAddToCart : any ,
 
 }
 
-function ProductCard( { image , name , style } : ProductCard) {
+function ProductCard( { image , name , style , onAddToCart  } : ProductCard) {
     return (
         <View style={styles.card}>
             <View style={styles.imageContainer}>
@@ -17,7 +18,7 @@ function ProductCard( { image , name , style } : ProductCard) {
             </View>
 
         <View style = {styles.textContainer}>
-         <Text style={styles.productNameText}>Bags</Text>
+         <Text style={styles.productNameText}>Dealer Name</Text>
            <View style = {styles.ratingContainer}>
               <Text style={styles.rating}>4.0 </Text>
               <Text>⭐</Text>
@@ -38,7 +39,7 @@ function ProductCard( { image , name , style } : ProductCard) {
             <Text style={styles.productPrice}> ₹2499.00</Text>
             <Text style={styles.productOldPrice}> ₹4000.00</Text>
           </View>
-          <TouchableOpacity style={styles.addToCart}>
+          <TouchableOpacity style={styles.addToCart} onPress={onAddToCart}>
             <IonIcon name = "cart-sharp" size = {18} color='#fff'/>
             <Text style={styles.addToCartText}>Add </Text>
           </TouchableOpacity>

@@ -42,7 +42,17 @@ export type RootStackParmeterList = {
     Notification : undefined 
     Filter : undefined
     HomePage : undefined 
-    ProductPage : undefined 
+    ProductPage : {
+        dealerData : {
+            company_name : string,
+            year : string,
+            dealer_name : string,
+            rating : string,
+            address : string,
+            phone : string,
+            no_product : string,
+        }
+    } 
 
 };
 

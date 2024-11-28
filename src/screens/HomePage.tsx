@@ -9,6 +9,18 @@ import { HomePageProps } from '../../navigations/UserIndex'
 import DealerCards from '../../components/DealerCards'
 
 function HomePage({ navigation }: HomePageProps) {
+
+  const dealerData = {
+    image: "google",
+    company_name : "Admin",
+    year : "2024",
+    dealer_name : "Admin 1",
+    rating : "5.0",
+    address : "Manjalpur ,Vadodara",
+    phone : " +91 9098765431",
+    no_product : "1",
+  };
+
   return (
     <View style={styles.container}>
         // Location Bar Row
@@ -57,23 +69,25 @@ function HomePage({ navigation }: HomePageProps) {
           {/* <FlashCards image={ImagesAssets.school} title="Ambe" location='Manjalpur' />
           <FlashCards image={ImagesAssets.school2} title="LFS" location='Manjalpur' /> */}
 
-          <DealerCards image={ImagesAssets.google}
-            company_name = "Name / Company Name"
-            year = "2024"
-            dealer_name = "Admin"
-            rating = "5.0"
-            address = "Manjalpur ,Vadodara"
-            phone = " +91 9098765431"
-            no_product = "1" onPress = {() => navigation.navigate("ProductPage")} />
 
-<DealerCards image={ImagesAssets.facebook}
+
+          <DealerCards image={ImagesAssets.google}
+            company_name = {dealerData.company_name}
+            year = {dealerData.year}
+            dealer_name = {dealerData.dealer_name}
+            rating = {dealerData.rating}
+            address = {dealerData.address}
+            phone = {dealerData.phone}
+            no_product = {dealerData.no_product} onPress = {() => navigation.navigate("ProductPage" , {dealerData})} />
+
+{/* <DealerCards image={ImagesAssets.facebook}
             company_name = "Name / Company Name"
             year = "2024"
             dealer_name = "Admin"
             rating = "5.0"
             address = "Vadodara Address,,Vadodara,Gujarat,India-909090"
             phone = " +91 9098765432"
-            no_product = "1" onPress = {() => navigation.navigate("ProductPage")} />
+            no_product = "1" onPress = {() => navigation.navigate("ProductPage")} /> */}
 
 
         </ScrollView>
