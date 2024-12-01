@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,23 +10,34 @@ import {
   Alert,
 } from 'react-native';
 import { IonIcon } from '../../components/Icons';
+import axios from 'axios';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParmeterList } from '../../navigations/UserIndex';
+import { NavigationAction } from '@react-navigation/native';
+
+
+type Props = NativeStackScreenProps<RootStackParmeterList, 'OtpVerificationScreen'>;
 
 interface State {
+  email: string;
   otp: string[];
+
 }
 
-export class OtpVerificationScreen extends Component<{}, State> {
+
+export class OtpVerificationScreen extends Component<Props, State> {
 
   inputRefs: React.RefObject<TextInput>[];
 
-  constructor(props: {}) {
+  constructor(props: Props) {
     super(props);
     this.state = {
-      otp: ['', '', '', ''],
+      email: this.props.route.params?.email || '',
+      otp: ['', '', '', '', ''],
     };
 
     // Create references for each input box
-    this.inputRefs = Array.from({ length: 4 }, () => createRef<TextInput>());
+    this.inputRefs = Array.from({ length: 5 }, () => createRef<TextInput>());
   }
 
   handleChangeText = (text: string, index: number) => {
@@ -37,7 +48,7 @@ export class OtpVerificationScreen extends Component<{}, State> {
       this.setState({ otp: updatedOTP });
 
       // Move to the next input box if text is entered
-      if (text && index < 3) {
+      if (text && index < 4) {
         this.inputRefs[index + 1].current?.focus();
       }
     }
@@ -63,29 +74,79 @@ export class OtpVerificationScreen extends Component<{}, State> {
     }
   };
 
-  handleVerify = () => {
-    const { otp } = this.state;
+  handleVerify = async () => {
+    const { otp, email } = this.state;
     const fullOTP = otp.join('');
-    if (fullOTP.length === 4) {
-      Alert.alert(
-        'OTP Verification', // Title
-        'Your OTP is verified successfully!', // Message
-        [
-          { text: 'OK', onPress: () => console.log('OK Pressed') }, // Button
-        ]
-      );
+    console.log(email)
+    if (fullOTP.length === 5) {
+      try {
+        // Axios POST request
+        const response = await axios.post("https://eduneeds.co.in/api/v1/auth/verify", {
+          "email": email,
+          "otp": Number(fullOTP),
+          "type": "login",// types => 1: registration, 2: login
+          "device_id": "12345",
+          "token": "82812398792837192jhcvjhdvwfuwej",
+          "device_info": {
+            "model": "12345",
+            "deviceId": "12345",
+            "osVersion": "IOS",
+            "device_type": "IOS",
+            "manufacturer": "287398172398"
+          }
+        });
+
+        if (response.status === 200) {
+          console.log("Response Data:", response.data);
+          Alert.alert("Success", "OTP Verified Successfully.");
+          this.props.navigation.navigate("MainApp");
+          
+        } else {
+          Alert.alert("Invalid OTP", "Please enter a valid 5-digit OTP.");
+        }
+      } catch (error: any) {
+
+        console.error(error);
+        Alert.alert(
+          "Error",
+          error.response?.data?.message || "Something went wrong."
+        );
+      }
     }
     else {
       Alert.alert(
         'Invalid OTP', // Title
-        'Please enter a valid 4-digit OTP.', // Message
+        'Please enter a valid 5-digit OTP.', // Message
         [
           { text: 'OK', onPress: () => console.log('OK Pressed') }, // Button
         ]
       );
     };
-    
+
   };
+
+  handleResend = async () => {
+    const {email} = this.state
+    // console.log(email)
+
+    try {
+      const response = await axios.post("https://eduneeds.co.in/api/v1/auth/resend" , {
+        "email": email,
+        "type": "login" // types => 1: registration, 2: login
+      })
+      console.log(response.data)
+
+      if (response.status === 200) {
+        Alert.alert("Success", "OTP Resent Successfully.");
+        
+      } else {
+        Alert.alert("SOmething Went Wrong.", "Please try Resend OTP after few seconds.");
+      }
+    }
+    catch{
+      Alert.alert("SOmething Went Wrong.", "Please try Resend OTP after few seconds.");
+    }
+  }
 
   render() {
     const { otp } = this.state;
@@ -95,13 +156,13 @@ export class OtpVerificationScreen extends Component<{}, State> {
         <View style={styles.header}>
           <Text style={styles.headerText}>Verification Code</Text>
           <Text style={styles.instructionText}>
-            Please Enter the 4-digit OTP sent to your registered email <Text style={styles.email}>abcd@gmail.com</Text>
+            Please Enter the 5-digit OTP sent to your registered email <Text style={styles.email}>abcd@gmail.com</Text>
           </Text>
         </View>
 
         {/* OTP Input Section */}
         <View style={styles.content}>
-          
+
 
           <View style={styles.otpContainer}>
             {otp.map((digit, index) => (
@@ -118,7 +179,7 @@ export class OtpVerificationScreen extends Component<{}, State> {
             ))}
           </View>
           <Text style={styles.instructionText}>
-            If you didn't receive the code ? <Text style={styles.email}>Resend.</Text>
+            If you didn't receive the code ? <TouchableOpacity onPress = {this.handleResend}><Text style={styles.email}> Resend.</Text></TouchableOpacity>
           </Text>
           <TouchableOpacity style={styles.verifyButton} onPress={this.handleVerify}>
             <Text style={styles.verifyButtonText}>Verify OTP</Text>
@@ -146,16 +207,16 @@ const styles = StyleSheet.create({
   },
   instructionText: {
     fontSize: 18,
-    marginTop : 5 ,
+    marginTop: 5,
     color: '#a6a4a4',
     textAlign: 'left',
   },
-  email : {
-    color : "#3EB57C"
+  email: {
+    color: "#3EB57C"
   },
   content: {
-  alignItems : "center" ,
-  paddingTop : 100 , 
+    alignItems: "center",
+    paddingTop: 100,
   },
   otpContainer: {
     flexDirection: 'row',
@@ -167,15 +228,15 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     fontSize: 24,
-    color : "#3EB57C",
-    fontWeight : "bold",
+    color: "#3EB57C",
+    fontWeight: "bold",
     borderRadius: 8,
     textAlign: 'center',
     backgroundColor: '#f0f0f0',
   },
   verifyButton: {
     backgroundColor: '#3EB57C',
-    marginTop : 10 ,
+    marginTop: 10,
     width: '60%',
     padding: 12,
     borderRadius: 8,

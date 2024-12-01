@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { ImagesAssets } from '../../assets/ImageAsset';
 
 //navigation 
@@ -9,77 +9,137 @@ import { RootStackParmeterList } from '../../navigations/UserIndex';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { IonIcon } from '../../components/Icons';
-type RegisterProp = NativeStackScreenProps<RootStackParmeterList , "Register">
+import axios from 'axios';
+type RegisterProp = NativeStackScreenProps<RootStackParmeterList, "Register">
 
-  const Register  = ({route} : RegisterProp) => {
 
-  const {productId} = route.params
+function Register({ navigation }: RegisterProp) {
 
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParmeterList>>()
+  // const navigation = useNavigation<NativeStackNavigationProp<RootStackParmeterList>>()
+
+
+  const [name, setName] = useState<string>("")
+  const [email, setEmail] = useState<string>("")
+  const [mobile, setMobile] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
+
+
+  const handleRegisration = async () => {
+
+    if (!email) {
+      Alert.alert("Error", "Please enter a email address.");
+      return
+    }
+    if (!name) {
+      Alert.alert("Error", "Please enter a name.");
+      return
+    }
+    if (!mobile) {
+      Alert.alert("Error", "Please enter a phone number.");
+      return
+    }
+
+    setLoading(true)
+
+    try {
+      const response = await axios.post("https://eduneeds.co.in/api/v1/auth/register", {
+        name: name,
+        email: email,
+        mobile: mobile,
+      })
+
+      console.log(response)
+
+      if (response.status === 200) {
+        console.log("Response Data:", response.data);
+        setLoading(false)
+        Alert.alert("Success", "OTP sent to your email.");
+        navigation.navigate("OtpVerificationScreen", { email });
+      } else {
+        Alert.alert("Error", "Failed to send OTP. Try again.");
+      }
+
+    }
+    catch (error: any) {
+      console.error(error);
+      Alert.alert(
+        "Error",
+        error.response?.data?.message || "Something went wrong."
+      );
+
+    }
+  }
+
 
   return (
     <View style={styles.container}>
-      <View style = {styles.TopImage}>
-      <Image source={ImagesAssets.logo} style={{ width : 200, height : 180}}/>          
+      <View style={styles.TopImage}>
+        <Image source={ImagesAssets.logo} style={{ width: 200, height: 180 }} />
       </View>
       <View style={styles.headingContainer}>
-      <Text style={styles.headerText}>Sign Up</Text>
+        <Text style={styles.headerText}>Sign Up</Text>
       </View>
-    <View style={styles.secondaryContainer}>
+      <View style={styles.secondaryContainer}>
 
-      <View style={styles.thirdContainer}>
-        <IonIcon name="person-outline" size={20} color="#666" style={styles.icon2} />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Your Name"
-          placeholderTextColor="#aaa"
-        />
-      </View>
-      <View style={styles.thirdContainer}>
-        <IonIcon name="mail-outline" size={20} color="#666" style={styles.icon2} />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your Email"
-          placeholderTextColor="#aaa"
-        />
-      </View>
-      <View style={styles.thirdContainer}>
-        <IonIcon name="lock-closed-outline" size={20} color="#666" style={styles.icon2} />
-        <TextInput
-          style={styles.input}
-          placeholder="Create Password"
-          placeholderTextColor="#aaa"
-        />
-      </View>
+        <View style={styles.thirdContainer}>
+          <IonIcon name="person-outline" size={20} color="#666" style={styles.icon2} />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Your Name"
+            placeholderTextColor="#aaa"
+            value={name}
+            onChangeText={(text) => setName(text)}
+          />
+        </View>
+        <View style={styles.thirdContainer}>
+          <IonIcon name="mail-outline" size={20} color="#666" style={styles.icon2} />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Your Email"
+            placeholderTextColor="#aaa"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+          />
+        </View>
+        <View style={styles.thirdContainer}>
+          <IonIcon name="call-outline" size={20} color="#666" style={styles.icon2} />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your Mobile Number"
+            placeholderTextColor="#aaa"
+            value={mobile}
+            onChangeText={(text) => setMobile(text)}
+          />
+        </View>
 
-      {/* Sign Up Button */}
-      <TouchableOpacity style={styles.signUpButton}>
-        <Text style={styles.signUpButtonText}>Sign Up</Text>
-      </TouchableOpacity>
-
-      {/* Terms and Privacy Text */}
-      <Text style={styles.termsText}>
-        By Signing Up, You agree to our Terms and Privacy Policies
-      </Text>
-
-      {/* Social Media Buttons */}
-      <View style={styles.socialMediaContainer}>
-        <TouchableOpacity style={styles.iconContainer}>
-        <Image source={ImagesAssets.google} style={{ width : 40 , height : 40}} />          
+        {/* Sign Up Button */}
+        <TouchableOpacity style={styles.signUpButton} onPress={handleRegisration} disabled={loading}>
+          <Text style={styles.signUpButtonText}>{loading ? "Signing up..." : "Sign Up"}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}>
-        <Image source={ImagesAssets.facebook} style={styles.icon} />          
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}>
-        <Image source={ImagesAssets.twitter} style={{ width : 25 , height : 25}}/>          
-        </TouchableOpacity>
-      </View>
 
-      {/* Login Text */}
-      <Text style={styles.loginText} onPress={ () => navigation.navigate("Login")}>
-        Already Have an Account? <Text style={styles.loginLink}>Login</Text>
-      </Text>
-    </View>
+        {/* Terms and Privacy Text */}
+        <Text style={styles.termsText}>
+          By Signing Up, You agree to our Terms and Privacy Policies
+        </Text>
+
+        {/* Social Media Buttons */}
+        <View style={styles.socialMediaContainer}>
+          <TouchableOpacity style={styles.iconContainer}>
+            <Image source={ImagesAssets.google} style={{ width: 40, height: 40 }} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconContainer}>
+            <Image source={ImagesAssets.facebook} style={styles.icon} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconContainer}>
+            <Image source={ImagesAssets.twitter} style={{ width: 25, height: 25 }} />
+          </TouchableOpacity>
+        </View>
+
+        {/* Login Text */}
+        <Text style={styles.loginText} onPress={() => navigation.navigate("Login")}>
+          Already Have an Account? <Text style={styles.loginLink}>Login</Text>
+        </Text>
+      </View>
     </View>
   );
 };
@@ -89,7 +149,7 @@ const styles = StyleSheet.create({
     flex: 1, // Ensures the container takes up the full height of the screen
     backgroundColor: '#FFFFFF',
   },
-  TopImage:{
+  TopImage: {
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
   },
@@ -173,14 +233,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     marginTop: 30,
-    fontWeight : "bold",
+    fontWeight: "bold",
   },
   loginLink: {
     color: '#00A86B',
     fontWeight: 'bold',
   },
-  thirdContainer : {
-    padding : 2 ,
+  thirdContainer: {
+    padding: 2,
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,

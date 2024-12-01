@@ -38,21 +38,24 @@ export type RootStackParmeterList = {
     Login: undefined;
     Register: { productId: string }
     ForgotPassword: undefined;
-    OtpVerificationScreen : undefined ;
-    Notification : undefined 
-    Filter : undefined
-    HomePage : undefined 
-    ProductPage : {
-        dealerData : {
-            company_name : string,
-            year : string,
-            dealer_name : string,
-            rating : string,
-            address : string,
-            phone : string,
-            no_product : string,
+    OtpVerificationScreen: {
+        email: string,
+    }
+    Notification: undefined
+    Filter: undefined
+    HomePage: undefined
+    ProductPage: {
+        dealerData: {
+            company_name: string,
+            year: string,
+            dealer_name: string,
+            rating: string,
+            address: string,
+            phone: string,
+            no_product: string,
         }
-    } 
+    }
+    MainApp: undefined,
 
 };
 
@@ -77,13 +80,19 @@ function AuthStack() {
                 name="ForgotPassword"
                 component={ForgotPassword}
                 options={{ title: "Forgot Password " }} />
-                
-            <Stack.Screen 
-                name = "OtpVerificationScreen"
+
+            <Stack.Screen
+                name="OtpVerificationScreen"
                 component={OtpVerificationScreen}
-                options = {{
-                  title : "Verification Page"  
-                }}/>
+                options={{
+                    title: "Verification Page"
+                }} />
+            <Stack.Screen name="MainApp"
+                component={MainApp}
+                options={{
+                    title: "Home Page"
+                }}
+            />
 
         </Stack.Navigator>
     );
@@ -95,19 +104,19 @@ const HomeStackNavigator = createNativeStackNavigator<RootStackParmeterList>();
 export type HomePageProps = NativeStackScreenProps<RootStackParmeterList, "HomePage">;
 export type NotificationProps = NativeStackScreenProps<RootStackParmeterList, "Notification">;
 export type FilterProps = NativeStackScreenProps<RootStackParmeterList, "Filter">;
-export type ProductPageProps = NativeStackScreenProps<RootStackParmeterList , "ProductPage">
+export type ProductPageProps = NativeStackScreenProps<RootStackParmeterList, "ProductPage">
 
 // Nested Screens From Home
 function HomeStack() {
     return (
-      <HomeStackNavigator.Navigator screenOptions={{ headerShown: false }}>
-        <HomeStackNavigator.Screen name="HomePage" component={HomePage} />
-        <HomeStackNavigator.Screen name="Notification" component={Notification} />
-        <HomeStackNavigator.Screen name="Filter" component={Filter} />
-        <HomeStackNavigator.Screen name="ProductPage" component ={ProductPage}/>
-      </HomeStackNavigator.Navigator>
+        <HomeStackNavigator.Navigator screenOptions={{ headerShown: false }}>
+            <HomeStackNavigator.Screen name="HomePage" component={HomePage} />
+            <HomeStackNavigator.Screen name="Notification" component={Notification} />
+            <HomeStackNavigator.Screen name="Filter" component={Filter} />
+            <HomeStackNavigator.Screen name="ProductPage" component={ProductPage} />
+        </HomeStackNavigator.Navigator>
     );
-  }
+}
 const Tab = createBottomTabNavigator();
 function MainApp() {
     return (
