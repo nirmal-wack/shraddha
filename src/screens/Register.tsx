@@ -62,6 +62,7 @@ function Register({ navigation }: RegisterProp) {
     }
     catch (error: any) {
       console.error(error);
+      setLoading(false)
       Alert.alert(
         "Error",
         error.response?.data?.message || "Something went wrong."
@@ -74,15 +75,17 @@ function Register({ navigation }: RegisterProp) {
   return (
     <View style={styles.container}>
       <View style={styles.TopImage}>
-        <Image source={ImagesAssets.logo} style={{ width: 200, height: 180 }} />
+        <Image source={ImagesAssets.logo1} style={{ width: 120, height: 155 }} />
       </View>
       <View style={styles.headingContainer}>
-        <Text style={styles.headerText}>Sign Up</Text>
+        <Text style={styles.headerText}>Welcome</Text>
+        <Text style={[styles.headerInnerText]}>Create Your Account </Text>
+
       </View>
       <View style={styles.secondaryContainer}>
 
         <View style={styles.thirdContainer}>
-          <IonIcon name="person-outline" size={20} color="#666" style={styles.icon2} />
+          <IonIcon name="person" size={20} color="#666" style={styles.icon2} />
           <TextInput
             style={styles.input}
             placeholder="Enter Your Name"
@@ -92,7 +95,7 @@ function Register({ navigation }: RegisterProp) {
           />
         </View>
         <View style={styles.thirdContainer}>
-          <IonIcon name="mail-outline" size={20} color="#666" style={styles.icon2} />
+          <IonIcon name="mail" size={20} color="#666" style={styles.icon2} />
           <TextInput
             style={styles.input}
             placeholder="Enter Your Email"
@@ -102,7 +105,7 @@ function Register({ navigation }: RegisterProp) {
           />
         </View>
         <View style={styles.thirdContainer}>
-          <IonIcon name="call-outline" size={20} color="#666" style={styles.icon2} />
+          <IonIcon name="call" size={20} color="#666" style={styles.icon2} />
           <TextInput
             style={styles.input}
             placeholder="Enter your Mobile Number"
@@ -152,6 +155,7 @@ const styles = StyleSheet.create({
   TopImage: {
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
+    marginTop : 30 ,
   },
 
   secondaryContainer: {
@@ -164,13 +168,22 @@ const styles = StyleSheet.create({
   },
   headingContainer: {
     marginHorizontal: 30,
-    marginTop: 50, // Adjusted from 200 to ensure it doesn't push content too far down
+    marginTop: 70, // Adjusted from 200 to ensure it doesn't push content too far down
   },
   headerText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 30,
+    fontSize: 32,
+    color: '#3E3E3E',
+    // paddingHorizontal: 5,
+    fontWeight : "bold",
+    // alignContent: "center",
+    marginBottom: 5,
+  },
+  headerInnerText: {
+    color: '#3E3E3E',
+    // paddingHorizontal: 6,
+    fontWeight : "bold",
+    marginBottom: 5,
+    fontSize: 16 
   },
   // input: {
   //   width: '100%',
@@ -240,14 +253,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   thirdContainer: {
-    padding: 2,
+    padding: 4,
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
+    borderColor: "#f0f0f0",
+    borderRadius: 25,
     paddingHorizontal: 10,
     marginVertical: 10,
+    
+    // Shadow for iOS
+    shadowColor: '#000',
+    shadowOpacity: 0.2, // Adjust opacity for a subtle effect
+    shadowRadius: 4,   // Blur effect for shadow
+    shadowOffset: { width: 0, height: 2 }, // Direction of the shadow
+  
+    // Shadow for Android
+    elevation: 5, // Elevation determines the height of the shadow
+    backgroundColor: '#fff',
 
   },
   icon2: {
@@ -256,6 +279,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
+    marginLeft : 10 ,
     color: "#333",
   },
 });

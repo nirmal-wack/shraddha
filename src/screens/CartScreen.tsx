@@ -27,9 +27,14 @@ export class CartScreen extends Component {
 
         {/* Checkout Section */}
         <View style={styles.checkoutContainer}>
-          <Text style={styles.totalText}>Total: $60</Text>
+          
+          <Text>Pay Using </Text>
           <TouchableOpacity style={styles.checkoutButton}>
-            <Text style={styles.checkoutButtonText}>Check Out</Text>
+          <Text style={styles.totalText}>$60</Text>
+          <View style = {styles.OrderComp}>
+          <Text style={styles.checkoutButtonText}>Place Order</Text>
+          <IonIcon name = "chevron-forward-sharp" size = {16} color='#fff' />
+          </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -62,24 +67,43 @@ const styles = StyleSheet.create({
     padding: 16,
     borderTopWidth: 1,
     borderTopColor: '#ddd',
+    flexDirection : "row",
+    alignItems : "center",
+    justifyContent : "space-between"
+
   },
   totalText: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 10,
-    textAlign: 'center',
+    color: '#fff',
+
+    // marginBottom: 10,
+    // textAlign: 'center',
   },
   checkoutButton: {
     backgroundColor: '#3EB57C',
-    paddingVertical: 12,
+    flexDirection : "row",
+    paddingVertical: 5,
+    width : "70%",
+    height : 50,
     borderRadius: 8,
     alignItems: 'center',
+    justifyContent : "space-between",
+    marginHorizontal : 5 ,
+    paddingHorizontal: 10, // Added padding of 5 from the left and right sides
   },
   checkoutButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',
+    // marginBottom: 10,
+
   },
+  OrderComp : {
+    flexDirection : "row",
+    alignItems : "center",
+    justifyContent : "center",
+  }
 });
 
 export default CartScreen;

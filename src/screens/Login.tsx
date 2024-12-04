@@ -56,11 +56,11 @@ const Login = ({ navigation }: LoginProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.headingContainer}>
-        <Text style={styles.headerText}>LOGO</Text>
+        <Image source = {ImagesAssets.logo1} style = {styles.logoImage}/>
       </View>
       <View>
-        <Text style={[styles.headText, { fontSize: 24 }]}   > Log In </Text>
-        <Text style={[styles.headerInnerText, { fontSize: 16 }]}> Welcome back </Text>
+        <Text style={[styles.headText]}> Welcome </Text>
+        <Text style={[styles.headerInnerText, { fontSize: 16 }]}> Sign In To Continue </Text>
       </View>
 
 
@@ -70,10 +70,10 @@ const Login = ({ navigation }: LoginProps) => {
 
         {/* Input Fields */}
         <View style={[styles.thirdContainer, {}]}>
-          <IonIcon name="mail-outline" size={20} color="#666" style={styles.icon2} />
+          <IonIcon name="mail" size={24} color="#3E3E3E" style={styles.icon2} />
           <TextInput
             style={styles.inputTwo}
-            placeholder="Enter your Email"
+            placeholder="Enter Your Email"
             placeholderTextColor="#aaa"
             value={email}
             onChangeText={(text) => setEmail(text)}
@@ -133,39 +133,55 @@ const styles = StyleSheet.create({
     flex: 1, // Ensures the container takes up the full height of the screen
     backgroundColor: '#FFFFFF',
   },
+
+  headingContainer: {
+    // marginHorizontal: 20,
+    marginTop: 60, // Adjusted from 200 to ensure it doesn't push content too far down
+    // backgroundColor: '#000',
+    alignItems : "center",
+    justifyContent : "center",
+    padding : 20 ,
+
+  },
+  logoImage : {
+    width : 120 ,
+    height : 155 ,
+    marginTop : 20 ,
+  },
+
+  // headerText: {
+  //   fontSize: 50,
+  //   fontWeight: 'bold',
+  //   color: '#333',
+  //   marginBottom: 20,
+  
+  // },
+  headText: {
+    fontSize: 32,
+    color: '#3E3E3E',
+    paddingHorizontal: 20,
+    paddingTop: 90,
+    fontWeight : "bold",
+    alignContent: "center",
+    marginBottom: 5,
+    
+  },
+  headerInnerText: {
+    color: '#3E3E3E',
+    paddingHorizontal: 25,
+    fontWeight : "bold",
+    marginBottom: 5,
+  },
   secondaryContainer: {
     flex: 1,
     paddingHorizontal: 20, // Combines paddingLeft and paddingRight
-    paddingTop: 70,
+    paddingTop: 30,
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
 
   },
-  headingContainer: {
-    marginHorizontal: 20,
-    marginTop: 150, // Adjusted from 200 to ensure it doesn't push content too far down
-  },
-  headerText: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 20,
-  },
-  headText: {
-    color: '#3E3E3E',
-    paddingHorizontal: 15,
-    paddingTop: 40,
-    justifyContent: 'flex-start',
-    marginBottom: 10,
-  },
-  headerInnerText: {
-    color: '#3E3E3E',
-    paddingHorizontal: 15,
-    marginBottom: 5,
-  },
-
   input: {
-    width: '100%',
+    width: '50%',
     padding: 15,
     color: '#3E3E3E',
     borderWidth: 1,
@@ -173,6 +189,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     marginBottom: 20,
     fontSize: 16,
+    
   },
   forgotPassword: {
     flexDirection: "row",  // Arrange items in a row
@@ -187,11 +204,12 @@ const styles = StyleSheet.create({
   },
   signUpButton: {
     width: '80%',
-    padding: 10,
+    height : '15%',
     backgroundColor: '#3EB57C',
-    borderRadius: 12,
+    borderRadius: 25,
     alignItems: 'center',
-    marginTop: 20,
+    justifyContent : "center",
+    marginTop: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
@@ -251,18 +269,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
+    borderColor: "#f0f0f0",
+    borderRadius: 25,
     paddingHorizontal: 10,
     marginVertical: 10,
-
+    
+    // Shadow for iOS
+    shadowColor: '#000',
+    shadowOpacity: 0.2, // Adjust opacity for a subtle effect
+    shadowRadius: 4,   // Blur effect for shadow
+    shadowOffset: { width: 0, height: 2 }, // Direction of the shadow
+  
+    // Shadow for Android
+    elevation: 5, // Elevation determines the height of the shadow
+    backgroundColor: '#fff', // Ensure background is opaque for proper shadow rendering
   },
+  
   icon2: {
     marginRight: 10,
   },
   inputTwo: {
     flex: 1,
     fontSize: 18,
+    marginLeft : 10 ,
     color: "#333",
   }
 });

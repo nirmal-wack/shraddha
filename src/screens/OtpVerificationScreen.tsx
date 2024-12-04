@@ -14,6 +14,8 @@ import axios from 'axios';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParmeterList } from '../../navigations/UserIndex';
 import { NavigationAction } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 type Props = NativeStackScreenProps<RootStackParmeterList, 'OtpVerificationScreen'>;
@@ -99,7 +101,14 @@ export class OtpVerificationScreen extends Component<Props, State> {
         if (response.status === 200) {
           console.log("Response Data:", response.data);
           Alert.alert("Success", "OTP Verified Successfully.");
-          this.props.navigation.navigate("MainApp");
+          await AsyncStorage.setItem('userToken', 'dummy_token');
+          const token = await AsyncStorage.getItem('userToken');
+          console.log(token)
+          this.props.navigation.reset({
+            index: 0,
+            routes: [{ name: "MainApp" }],
+          });
+          
           
         } else {
           Alert.alert("Invalid OTP", "Please enter a valid 5-digit OTP.");

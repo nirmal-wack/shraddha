@@ -3,27 +3,30 @@ import { Image, StyleSheet, Text, View , TouchableOpacity } from "react-native";
 import { IonIcon } from "./Icons";
 
 type ProductCard = {
+    id : any ,
+    productName : any ,
     image : any ,
-    name : any ,
-    style : any ,
-    onAddToCart : any ,
+    ratings : any ,
+    onAddToCart : () => void  ,
+    newPrice : any ,
+    oldPrice : any ,
 
 }
 
-function ProductCard( { image , name , style , onAddToCart  } : ProductCard) {
+function ProductCard( { id , image , productName , ratings , onAddToCart , oldPrice , newPrice } : ProductCard) {
     return (
-        <View style={styles.card}>
+        <View style={styles.card} id = {id}>
             <View style={styles.imageContainer}>
                 <Image source={image} style={styles.image} />
             </View>
 
         <View style = {styles.textContainer}>
-         <Text style={styles.productNameText}>Dealer Name</Text>
+         <Text style={styles.productNameText}>{productName}</Text>
            <View style = {styles.ratingContainer}>
-              <Text style={styles.rating}>4.0 </Text>
+              <Text style={styles.rating}>{ratings} </Text>
               <Text>⭐</Text>
             </View>
-          <Text style={styles.sellerNameText}>by dealer_name</Text>
+          {/* <Text style={styles.sellerNameText}>by dealer_name</Text> */}
 
           {/* Address & Contact */}
       <Text style={styles.description}>
@@ -36,8 +39,8 @@ function ProductCard( { image , name , style , onAddToCart  } : ProductCard) {
 {/* Products and Button */}
     <View style={styles.footer}>
           <View style = {styles.priceContainer}>
-            <Text style={styles.productPrice}> ₹2499.00</Text>
-            <Text style={styles.productOldPrice}> ₹4000.00</Text>
+            <Text style={styles.productPrice}> ₹{newPrice}</Text>
+            <Text style={styles.productOldPrice}>₹{oldPrice}</Text>
           </View>
           <TouchableOpacity style={styles.addToCart} onPress={onAddToCart}>
             <IonIcon name = "cart-sharp" size = {18} color='#fff'/>

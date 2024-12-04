@@ -9,19 +9,31 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthStack } from "../navigations/UserIndex";
 import { MainApp } from "../navigations/UserIndex";
 import { SplashScreens } from "../navigations/UserIndex";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const RootStack = createNativeStackNavigator();
 
 function App(): JSX.Element {
 
   // to check User Authentication 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
   // SplashScreen check
   const [showIntro, setShowIntro] = useState(false);
   const handleDone = () => {
     setShowIntro(false);
   };
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = await AsyncStorage.getItem('userToken');
+      setIsAuthenticated(!!token);
+    };
+    checkToken();
+  }, []);
+
+
 
   return showIntro ? <SplashScreens onDone={handleDone} /> : (
     <NavigationContainer>

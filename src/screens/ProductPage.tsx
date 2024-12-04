@@ -5,9 +5,12 @@ import { ImagesAssets } from "../../assets/ImageAsset";
 import { IonIcon } from "../../components/Icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParmeterList } from "../../navigations/UserIndex";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type ProductPageProps = NativeStackScreenProps<RootStackParmeterList, "ProductPage">;
-type Product = {
+export type Product = {
+  id : string ,
   name: string;
   price: number;
 };
@@ -15,11 +18,16 @@ type Product = {
 function ProductPage({ route }: ProductPageProps) {
   const { dealerData } = route.params;
   const [cart, setCart] = useState<Product[]>([]);
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParmeterList>>()
 
   const handleAddToCart = (product: Product) => {
     setCart((prevCart) => [...prevCart, product]);
     console.log(cart);
   };
+
+  const handleCheckout = () => {
+    navigation.navigate("Cart")
+  }
 
   return (
     <View style={styles.container}>
@@ -41,12 +49,9 @@ function ProductPage({ route }: ProductPageProps) {
         <Text style={styles.sectionTitle}>Our Products</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.productList}>
           <ProductCard
-            style={styles.card}
-            image={ImagesAssets.backpack}
-            name="Bag 1"
-            onAddToCart={() => handleAddToCart({ name: "Bag 1", price: 2499 })}
+            id = "1" image = {ImagesAssets.backpack}  productName  ="Bag 2" ratings = "5.0" onAddToCart = {() => handleAddToCart({ id : "1" , name: "Bag 2", price: 100 })}  oldPrice = "2400" newPrice = "100"
           />
-          <ProductCard
+          {/* <ProductCard
             style={styles.card}
             image={ImagesAssets.backpack}
             name="Bag 2"
@@ -57,13 +62,13 @@ function ProductPage({ route }: ProductPageProps) {
             image={ImagesAssets.backpack}
             name="Bag 3"
             onAddToCart={() => handleAddToCart({ name: "Bag 3", price: 2999 })}
-          />
+          /> */}
         </ScrollView>
       </View>
 
       {/* Checkout Button */}
       {cart.length > 0 && (
-        <TouchableOpacity style={styles.checkoutButton}>
+        <TouchableOpacity style={styles.checkoutButton} onPress = {handleCheckout}>
           <Text style={styles.checkoutText}>Checkout ({cart.length} items)</Text>
         </TouchableOpacity>
       )}

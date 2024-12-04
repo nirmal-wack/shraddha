@@ -8,8 +8,25 @@ import {
   ScrollView,
 } from "react-native";
 import { IonIcon } from "../../components/Icons"; // Ensure you have IonIcon imported properly
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationAction } from "@react-navigation/native";
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParmeterList } from "../../navigations/UserIndex";
 
-const ProfileScreen = () => {
+
+type ProfileScreenProps = NativeStackScreenProps<RootStackParmeterList,"ProfileScreen">
+
+const ProfileScreen = ( {navigation} : ProfileScreenProps) => {
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('userToken');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Login" }],
+    });
+    console.log('User logged out');
+  };
+
   return (
     <View style={styles.container}>
       {/* Header Section */}
@@ -64,6 +81,11 @@ const ProfileScreen = () => {
         <TouchableOpacity style={styles.option}>
           <IonIcon name="language-outline" size={24} color="#3EB57C" />
           <Text style={styles.optionText}>Change Language</Text>
+          <IonIcon name="chevron-forward-outline" size={20} color="#ccc" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option} onPress = {handleLogout} >
+          <IonIcon name="log-out-outline" size={24} color="#3EB57C" />
+          <Text style={styles.optionText}>Logout</Text>
           <IonIcon name="chevron-forward-outline" size={20} color="#ccc" />
         </TouchableOpacity>
       </ScrollView>

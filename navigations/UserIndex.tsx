@@ -56,6 +56,8 @@ export type RootStackParmeterList = {
         }
     }
     MainApp: undefined,
+    Cart : undefined ,
+    ProfileScreen : undefined, 
 
 };
 
@@ -117,6 +119,19 @@ function HomeStack() {
         </HomeStackNavigator.Navigator>
     );
 }
+
+const ProfileScreenNavigator = createNativeStackNavigator<RootStackParmeterList>();
+export type ProfilePageProps = NativeStackScreenProps<RootStackParmeterList, "ProfileScreen">;
+
+// Nested Screens From ProfileScreen
+function ProfileStack() {
+    return (
+        <ProfileScreenNavigator.Navigator screenOptions={{ headerShown: false }}>
+            <ProfileScreenNavigator.Screen name="ProfileScreen" component={ProfileScreen} />
+        </ProfileScreenNavigator.Navigator>
+    );
+}
+
 const Tab = createBottomTabNavigator();
 function MainApp() {
     return (
@@ -158,7 +173,7 @@ function MainApp() {
         >
             <Tab.Screen name="Home" component={HomeStack} />
             <Tab.Screen name="Cart" component={CartScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Screen name="Profile" component={ProfileStack} />
         </Tab.Navigator>
     )
 }
@@ -246,24 +261,24 @@ function UserIndex() {
 
 
 
-function ProfileStack() {
-    return (
-        <Stack.Navigator initialRouteName="Notification">
-            <Stack.Screen name="Notification"
-                component={Notification}
-                options={{
-                    title: "Notification Page"
-                }}
-            />
-            <Stack.Screen name= "Filter"
-                component={Filter}
-                options={{
-                    title: "Register Page"
-                }}
-            />
-        </Stack.Navigator>
-    );
-}
+// function ProfileStack() {
+//     return (
+//         <Stack.Navigator initialRouteName="Notification">
+//             <Stack.Screen name="Notification"
+//                 component={Notification}
+//                 options={{
+//                     title: "Notification Page"
+//                 }}
+//             />
+//             <Stack.Screen name= "Filter"
+//                 component={Filter}
+//                 options={{
+//                     title: "Register Page"
+//                 }}
+//             />
+//         </Stack.Navigator>
+//     );
+// }
 
 const styles = StyleSheet.create({
     slide: {
