@@ -159,13 +159,14 @@ export class OtpVerificationScreen extends Component<Props, State> {
 
   render() {
     const { otp } = this.state;
+    const {email} = this.state;
     return (
       <View style={styles.container}>
         {/* Header Section */}
         <View style={styles.header}>
           <Text style={styles.headerText}>Verification Code</Text>
           <Text style={styles.instructionText}>
-            Please Enter the 5-digit OTP sent to your registered email <Text style={styles.email}>abcd@gmail.com</Text>
+            Please Enter the 5-digit OTP sent to your registered email <Text style={styles.email}>{email}</Text>
           </Text>
         </View>
 
@@ -187,9 +188,11 @@ export class OtpVerificationScreen extends Component<Props, State> {
               />
             ))}
           </View>
-          <Text style={styles.instructionText}>
-            If you didn't receive the code ? <TouchableOpacity onPress = {this.handleResend}><Text style={styles.email}> Resend.</Text></TouchableOpacity>
-          </Text>
+          <View style = {styles.resendContainer}>
+            <Text style={styles.instructionText}>
+              If you didn't receive the code?</Text>
+            <TouchableOpacity onPress = {this.handleResend}><Text style={styles.email}> Resend</Text></TouchableOpacity>
+          </View>
           <TouchableOpacity style={styles.verifyButton} onPress={this.handleVerify}>
             <Text style={styles.verifyButtonText}>Verify OTP</Text>
           </TouchableOpacity>
@@ -214,14 +217,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#3E3E3E',
   },
+  resendContainer : {
+    flexDirection : "row",
+    alignItems : "center",
+    justifyContent : "center",
+  },
   instructionText: {
     fontSize: 18,
-    marginTop: 5,
+    // marginTop: 5,
     color: '#a6a4a4',
-    textAlign: 'left',
+    // textAlign: 'left',
   },
   email: {
-    color: "#3EB57C"
+    color: "#3EB57C",
+    fontSize: 17,
+
   },
   content: {
     alignItems: "center",

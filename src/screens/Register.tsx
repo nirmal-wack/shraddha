@@ -85,7 +85,7 @@ function Register({ navigation }: RegisterProp) {
       <View style={styles.secondaryContainer}>
 
         <View style={styles.thirdContainer}>
-          <IonIcon name="person" size={20} color="#666" style={styles.icon2} />
+          <IonIcon name="person" size={20} color="#3E3E3E"  style={styles.icon2} />
           <TextInput
             style={styles.input}
             placeholder="Enter Your Name"
@@ -95,7 +95,7 @@ function Register({ navigation }: RegisterProp) {
           />
         </View>
         <View style={styles.thirdContainer}>
-          <IonIcon name="mail" size={20} color="#666" style={styles.icon2} />
+          <IonIcon name="mail" size={20}  style={styles.icon2} color="#3E3E3E" />
           <TextInput
             style={styles.input}
             placeholder="Enter Your Email"
@@ -105,7 +105,7 @@ function Register({ navigation }: RegisterProp) {
           />
         </View>
         <View style={styles.thirdContainer}>
-          <IonIcon name="call" size={20} color="#666" style={styles.icon2} />
+          <IonIcon name="call" size={20}  style={styles.icon2} color="#3E3E3E" />
           <TextInput
             style={styles.input}
             placeholder="Enter your Mobile Number"
@@ -275,6 +275,7 @@ const styles = StyleSheet.create({
   },
   icon2: {
     marginRight: 10,
+    color : "#3E3E3E"    
   },
   input: {
     flex: 1,
