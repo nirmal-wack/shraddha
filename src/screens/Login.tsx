@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert , KeyboardAvoidingView } from 'react-native';
 import { ImagesAssets } from '../../assets/ImageAsset';
 
 //Navigate Stack Parameter
@@ -55,9 +55,15 @@ const Login = ({ navigation }: LoginProps) => {
 
   return (
     <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={{  flex: 1,
+        justifyContent: "center",
+        padding: 16}}
+    >
       <View style={styles.headingContainer}>
         <Image source = {ImagesAssets.logo1} style = {styles.logoImage}/>
       </View>
+      </KeyboardAvoidingView>
       <View>
         <Text style={[styles.headText]}> Welcome </Text>
         <Text style={[styles.headerInnerText, { fontSize: 16 }]}> Sign In To Continue </Text>
@@ -131,7 +137,7 @@ const Login = ({ navigation }: LoginProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1, // Ensures the container takes up the full height of the screen
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fff',
   },
 
   headingContainer: {
@@ -204,9 +210,9 @@ const styles = StyleSheet.create({
   },
   signUpButton: {
     width: '80%',
-    height : '15%',
+    height : '20%',
     backgroundColor: '#3EB57C',
-    borderRadius: 25,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent : "center",
     marginTop: 15,

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { Component , useState } from 'react'
+import { FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { IonIcon } from '../../components/Icons'
 import FlashCards from '../../components/FlashCards'
 import FlatCards from '../../components/FlatCards'
@@ -10,15 +10,45 @@ import DealerCards from '../../components/DealerCards'
 
 function HomePage({ navigation }: HomePageProps) {
 
-  const dealerData = {
-    image: "google",
-    company_name : "Admin",
-    year : "2024",
-    dealer_name : "Admin 1",
-    rating : "5.0",
-    address : "Manjalpur ,Vadodara",
-    phone : " +91 9098765431",
-    no_product : "1",
+  const dealerDataArray = [
+    {
+      image: ImagesAssets.google,
+      company_name: "Company 1",
+      year: "2024",
+      dealer_name: "Dealer Alpha",
+      rating: "5.0",
+      address: "Manjalpur, Vadodara",
+      phone: "+91 9098765431",
+      no_product: "1",
+    },
+    {
+      image: ImagesAssets.google,
+      company_name: "Company 2",
+      year: "2025",
+      dealer_name: "Dealer Beta",
+      rating: "4.5",
+      address: "Alkapuri, Vadodara",
+      phone: "+91 9876543210",
+      no_product: "2",
+    },
+  ];
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredData, setFilteredData] = useState(dealerDataArray);
+
+  const handleSearch = (query: string) => {
+    console.log()
+    setSearchQuery(query);
+
+    if (query.trim() === '') {
+      setFilteredData(dealerDataArray); // Reset if the query is empty
+    } else {
+      const filtered = dealerDataArray.filter(item =>
+        item.dealer_name.toLowerCase().includes(query.toLowerCase())
+      );
+      console.log(filtered)
+      setFilteredData(filtered);
+    }
   };
 
   return (
@@ -39,7 +69,7 @@ function HomePage({ navigation }: HomePageProps) {
       <View style={styles.thirdContainer}>
         <View style={styles.searchContainer} >
           <IonIcon name="search-sharp" color='#3E3E3E' />
-          <TextInput placeholder='Search Here...' />
+          <TextInput placeholder='Search Here...' value={searchQuery} onChangeText={handleSearch}/>
         </View>
         <TouchableOpacity style={[styles.filter]} onPress={() => navigation.navigate("Filter")}>
           <IonIcon name="options-sharp" color="#FFFFFF" size={30} />
@@ -65,32 +95,26 @@ function HomePage({ navigation }: HomePageProps) {
       </View>
 
       <View style={styles.sliderContainer}>
-        <ScrollView horizontal={true} >
-          {/* <FlashCards image={ImagesAssets.school} title="Ambe" location='Manjalpur' />
-          <FlashCards image={ImagesAssets.school2} title="LFS" location='Manjalpur' /> */}
-
-
-
-          <DealerCards image={ImagesAssets.google}
-            company_name = {dealerData.company_name}
-            year = {dealerData.year}
-            dealer_name = {dealerData.dealer_name}
-            rating = {dealerData.rating}
-            address = {dealerData.address}
-            phone = {dealerData.phone}
-            no_product = {dealerData.no_product} onPress = {() => navigation.navigate("ProductPage" , {dealerData})} />
-
-{/* <DealerCards image={ImagesAssets.facebook}
-            company_name = "Name / Company Name"
-            year = "2024"
-            dealer_name = "Admin"
-            rating = "5.0"
-            address = "Vadodara Address,,Vadodara,Gujarat,India-909090"
-            phone = " +91 9098765432"
-            no_product = "1" onPress = {() => navigation.navigate("ProductPage")} /> */}
-
-
-        </ScrollView>
+        <FlatList
+        data={filteredData}
+        horizontal={true}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <DealerCards
+            image={item.image} // Replace with actual image assets if needed
+            company_name={item.company_name}
+            year={item.year}
+            dealer_name={item.dealer_name}
+            rating={item.rating}
+            address={item.address}
+            phone={item.phone}
+            no_product={item.no_product}
+            onPress={() =>
+              navigation.navigate("ProductPage", { dealerData: item })
+            }
+          />
+        )}
+      />
       </View>
 // Test Commit
     </View>

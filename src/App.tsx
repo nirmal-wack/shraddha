@@ -49,16 +49,16 @@ function App(): JSX.Element {
     return <SplashScreens onDone={handleDone} />;
   }
 
-  if (isLoading) {
-    return (
-      // <SplashScreens onDone={() => {}} />
-      <View>
-        <Text>
-        Loading
-        </Text>
-      </View>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     // <SplashScreens onDone={() => {}} />
+  //     <View>
+  //       <Text>
+  //       Loading
+  //       </Text>
+  //     </View>
+  //   );
+  // }
 
   return (
     <NavigationContainer>
